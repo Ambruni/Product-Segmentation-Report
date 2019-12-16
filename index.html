@@ -1,0 +1,86 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Product Category Segmentation Report</title>
+    <!-----------Link stylesheet------------------->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-----------Link to allow excel data manipulation------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+    <!-----------Link to graphs and charts------------------->
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-bundle.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.7.0/js/anychart-base.min.js"></script>
+    <!-----------Link to javascript file------------------->
+    <script type="text/javascript" src="index.js"></script>
+    
+  </head>
+  <body>
+    
+    <!-----------UPLOAD FILE------------------->
+    <div id="cover-page">
+      <div class="select-file" id="select-file">
+        <p id="select-file-heading">Generate Product Category Segmentation Report</p>
+        <input type="file" name="newfile" id="file-selection-button" onchange="parseExcelFile(event)" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <label id="file-selection-button-text" for="file-selection-button">Choose an excel file</label>
+        <!-----------"accept" is used to make user select only excel sheets------------------->
+      </div>
+    </div>
+    <div id="product-segmentation-main">
+    
+<!--------PRODUCT SEGMENT OVERVIEW DATA----->   
+    <div class="product-segments">
+      <div class="overview">
+        <div class="overview-object">
+          <label class="object-data" id="total-revenue">0</label>
+          <label class="object-text">Total Revenue</label>
+        </div>
+        <div class="overview-object">
+          <label class="object-data" id="total-categories">0</label>
+          <label class="object-text">Total Categories</label>
+        </div>
+        <div class="overview-object">
+          <label class="object-data" id="revenue-from-category">0</label>
+          <label class="object-text" id="revenue-from-category-label">Revenue from Category</label>
+        </div>
+        <div class="overview-object">
+          <label class="object-data" id="average-revenue">0</label>
+          <label class="object-text">Average Revenue</label>
+        </div>
+      </div>
+    </div>
+    
+    <!---Bar Graph for Categories--->
+    <div class="charts">
+      <div id="pareto-chart"></div>
+      <div id="bar-chart"></div>
+    </div>
+    
+<!-------CATEGORY DETAILS TABLE--------->
+    <div id="category-details">
+      <div class="category-details-header">
+        <label>Category Details</label>
+      <div id="search-filter">
+        <select id="category-selector" onchange="filterByCategory(event)">
+          <option disabled selected>Select Category</option>
+        </select>
+      </div>
+        </div>
+      
+      <div class="category-data">
+        <table id="category-data-table">
+          <tr>
+            <th onclick="sortData('string', 'CATEGORY_NAME')">Category Name<span><i class="fa fa-sort"></i></span></th>
+            <th onclick="sortData('date', 'First_Transaction_Date', -1)">First Transaction Date<span><i class="fa fa-sort"></i></span></th>
+            <th onclick="sortData('date', 'Last_Transaction_Date', -1)">Last Transaction Date<span><i class="fa fa-sort"></i></span></th>
+            <th onclick="sortData('number', 'Revenue', -1)">Revenue<span><i class="fa fa-sort"></i></span></th>
+            <th onclick="sortData('string', 'Segment', -1)">Segment<span><i class="fa fa-sort"></i></span></th>
+          </tr>
+        </table>
+      </div>
+    </div>
+      
+      </div>
+  </body>
+</html>
